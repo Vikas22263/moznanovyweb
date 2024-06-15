@@ -9,11 +9,11 @@ const Index = () => {
     <>
       <Head>
         <title>❤️Filmový ráj - Online filmy zdarma ke zhlédnutí</title>
-        <meta name="description" content="Discover the latest movies and watch them online. Stay updated with the newest additions to our movie database." />
-        <meta name="keywords" content="movies, latest movies, watch movies online, movie database" />
+        <meta name="description" content="Sledujte online filmy zdarma v HD kvalitě bez registrace. Objevte tisíce filmů a seriálů ke sledování na naší stránce. Streamujte bez omezení, kdykoliv a kdekoliv." />
+        <meta name="keywords" content="movies, latest movies, watch movies online, movie database, online filmy zdarma, bombuj, kukajto, svetserialu, filmovyraj, filmový ráj, filmovy raj, zdarma filmy" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="Movie Database - Watch Latest Movies Online" />
-        <meta property="og:description" content="Discover the latest movies and watch them online. Stay updated with the newest additions to our movie database." />
+        <meta property="og:title" content="❤️Filmový ráj - Online filmy zdarma ke zhlédnutí" />
+        <meta property="og:description" content="Sledujte online filmy zdarma v HD kvalitě bez registrace. Objevte tisíce filmů a seriálů ke sledování na naší stránce. Streamujte bez omezení, kdykoliv a kdekoliv." />
  
       </Head>
       <Header />
