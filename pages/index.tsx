@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Header from '../components/header/main';
 import Hero from '../components/index/hero/main';
 import LatestAdded from '../components/index/movies/latestadded';
-
+import Footer from '../components/footer/main';
 const Index = () => {
   return (
     <>
@@ -19,6 +19,7 @@ const Index = () => {
       <Header />
       <Hero />
       <LatestAdded />
+      <Footer />
     </>
   );
 };
