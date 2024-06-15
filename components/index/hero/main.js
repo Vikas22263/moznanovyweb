@@ -141,11 +141,11 @@ const Main = () => {
           <div className="flex flex-row gap-5 justify-center lg:justify-start mt-5">
             <Link href={`/film/${movie.id}/${movie.title}`}>
               <Button
-                className="bg-white text-black px-4 py-2 rounded-3xl w-1/2 lg:w-fit"
+                className="bg-white text-black px-4 py-2 rounded-3xl w-1/2 lg:w-fit w-full"
                 variant="flat"
                 startContent={<Play size={16} color="black" fill="black" />}
               >
-                Watch Now
+                Zhlédnout
               </Button>
             </Link>
             <Tooltip content="Již brzy!" placement="bottom">

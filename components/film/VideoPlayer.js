@@ -111,8 +111,8 @@ const VideoPlayer = ({ src, status, tmdbId }) => {
   }
 
   return (
-    <div className="w-full h-full flex flex-row gap-2">
-      <div className="w-4/5">
+    <div className="w-full h-full flex flex-col md:flex-row gap-2">
+      <div className="md:w-4/5">
         <MediaPlayer
           src={selectedSource?.url || src}
           poster="/movieready.webp"
@@ -124,7 +124,7 @@ const VideoPlayer = ({ src, status, tmdbId }) => {
           <MediaOutlet className="w-full h-full" />
         </MediaPlayer>
       </div>
-      <Card className="w-1/5 p-2" isFooterBlurred>
+      <Card className="md:w-1/5 p-2" isFooterBlurred>
           <div className="text-center">
             <p className="font-semibold text-xl">Zdroj</p>
           </div>
