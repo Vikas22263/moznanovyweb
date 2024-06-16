@@ -7,6 +7,7 @@ import Details from '@/components/film/details';
 import Collection from '@/components/film/collection'; // Ensure the correct path to the collection component
 import dynamic from 'next/dynamic';
 import { Card } from '@nextui-org/react';
+import Footer from '@/components/footer/main';
 
 const VideoPlayer = dynamic(() => import('@/components/film/VideoPlayer'), { ssr: false });
 
@@ -57,6 +58,7 @@ const MovieDetail = ({ movie, sources }) => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

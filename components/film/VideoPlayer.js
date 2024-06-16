@@ -1,4 +1,3 @@
-// components/film/VideoPlayer.js
 import React, { useState, useEffect } from "react";
 import { MediaOutlet, MediaPlayer } from "@vidstack/react";
 import { Image } from "@nextui-org/image";
@@ -10,6 +9,7 @@ const VideoPlayer = ({ src, status, tmdbId }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [sources, setSources] = useState([]);
   const [selectedSourceId, setSelectedSourceId] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchSources = async () => {
@@ -35,6 +35,7 @@ const VideoPlayer = ({ src, status, tmdbId }) => {
         }
       } catch (error) {
         console.error("Failed to fetch movie sources:", error);
+        setError('Failed to fetch movie sources.');
       }
     };
 
@@ -108,6 +109,59 @@ const VideoPlayer = ({ src, status, tmdbId }) => {
         </Card>
       </div>
     );
+  }
+
+  if (!src && !selectedSource?.url) {
+    return <>
+    <div className="flex flex-col md:flex-row gap-2">
+    <div className="relative w-full md:w-4/5">
+            <Image
+              width={1920}
+              alt="Movie ready"
+              src="/missingmovie.webp"
+              className="object-cover"
+            />
+            <div className="flex row justify-center items-center absolute left-0 top-0 w-full h-full z-10 ">
+              <Card className='px-5 py-2'>
+                <p>Bohužel, ani štěstí nepomůže, ale můžeš nám napsat na discord!</p>
+              </Card>
+            </div>
+          </div>
+          <Card className="md:w-1/5 p-2" isFooterBlurred>
+          <div className="text-center">
+            <p className="font-semibold text-xl">Zdroj</p>
+          </div>
+          <div className="mt-5 flex flex-col gap-2">
+            {sources.map((source) => (
+              <div
+                key={source.id}
+                className={`flex flex-row items-center gap-1 px-5 py-2 rounded-md justify-center cursor-pointer transition-all ease-in-out ${
+                  selectedSourceId === source.id ? 'bg-green-400' : 'hover:bg-green-400'
+                }`}
+                onClick={() => handleSourceClick(source.id)}
+              >
+                <p
+                  className={`${
+                    selectedSourceId === source.id
+                      ? 'text-black'
+                      : 'text-white group-hover:text-black'
+                  }`}
+                >
+                  {source.tag}
+                </p>
+                <Chip
+                  variant="shadow"
+                  color="danger"
+                  size="sm"
+                >
+                  {source.dabing}
+                </Chip>
+              </div>
+            ))}
+          </div>
+        </Card>
+        </div>
+    </>;
   }
 
   return (

@@ -1,8 +1,18 @@
-import { Input } from '@nextui-org/react'
-import React from 'react'
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button} from "@nextui-org/react";
+import { Input } from '@nextui-org/react';
+import React, { useState } from 'react';
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from '@nextui-org/react';
+import { useRouter } from 'next/router';
 
 const SearchBar = ({ isOpen, onOpenChange }) => {
+  const [searchText, setSearchText] = useState('');
+  const router = useRouter();
+
+  const handleSearch = () => {
+    if (searchText.trim()) {
+      router.push(`/search/${searchText}`);
+    }
+  };
+
   return (
     <div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -11,17 +21,20 @@ const SearchBar = ({ isOpen, onOpenChange }) => {
             <>
               <ModalHeader className="flex flex-col gap-1">Hledání filmů</ModalHeader>
               <ModalBody>
-                <p className='opacity-80'> 
-                  Zde napiš název filmu který hledáš, může se stát že najdeš film který nemáme v databázi ale potom si můžeš požádat o film.
-                </p>
-                <Input type="email" variant="underlined" label="Email" />
-
+                
+                <Input 
+                  type="text" 
+                  variant="underlined" 
+                  label="Název filmu" 
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                />
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
                   Zavřít
                 </Button>
-                <Button color="primary" onPress={onClose} className='bg-white text-black'>
+                <Button color="primary" onPress={() => { handleSearch(); onClose(); }} className='bg-white text-black'>
                   Vyhledat
                 </Button>
               </ModalFooter>
@@ -30,7 +43,7 @@ const SearchBar = ({ isOpen, onOpenChange }) => {
         </ModalContent>
       </Modal>
     </div>
-  )
+  );
 }
 
-export default SearchBar
+export default SearchBar;
