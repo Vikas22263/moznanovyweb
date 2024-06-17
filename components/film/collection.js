@@ -18,6 +18,10 @@ const Collection = ({ tmdbId }) => {
             `https://api.themoviedb.org/3/collection/${movieData.belongs_to_collection.id}?api_key=b5cd7be9dadc74b33077bede84a87bc0&language=cs-CZ`
           );
           const collectionData = await collectionRes.json();
+
+          // Sort the collection parts by release year
+          collectionData.parts.sort((a, b) => new Date(a.release_date) - new Date(b.release_date));
+
           setCollection(collectionData);
         }
       } catch (error) {

@@ -3,6 +3,7 @@ import { Button, Card, Chip, Tooltip } from "@nextui-org/react";
 import { Bookmark, Play } from "lucide-react";
 import Link from "next/link";
 import { Skeleton } from "@nextui-org/skeleton";
+import axios from "axios";
 
 const Main = () => {
   const [movie, setMovie] = useState(null);
@@ -12,20 +13,20 @@ const Main = () => {
     const fetchMovieData = async () => {
       try {
         // Fetch the movie list from the provided API
-        const response = await fetch(
+        const response = await axios.get(
           `https://storage.filmovyraj.com/api/public/displayMovies?page=1&limit=1`
         );
-        const data = await response.json();
+        const data = response.data;
 
         if (data.movies && data.movies.length > 0) {
           const firstMovie = data.movies[0];
           const tmdbId = firstMovie.tmdbId;
 
           // Fetch the movie details from TMDB API using the tmdbId
-          const tmdbResponse = await fetch(
+          const tmdbResponse = await axios.get(
             `https://api.themoviedb.org/3/movie/${tmdbId}?api_key=b5cd7be9dadc74b33077bede84a87bc0&language=cs-CZ`
           );
-          const tmdbData = await tmdbResponse.json();
+          const tmdbData = tmdbResponse.data;
           setMovie(tmdbData);
         }
       } catch (error) {
@@ -37,6 +38,19 @@ const Main = () => {
 
     fetchMovieData();
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (loading) {
+        console.log("Loading data from server...");
+      } else {
+        console.log("Data loaded or an error occurred.");
+        clearInterval(interval);
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [loading]);
 
   if (loading) {
     return (
@@ -77,39 +91,41 @@ const Main = () => {
   }
 
   if (!movie) {
-    return <div>
-    <div>
-      <Card className="w-full h-[600px] flex flex-col justify-end p-10">
-        <div className="flex flex-col">
-          <Skeleton className="w-[100px] h-[25px] rounded-full" />
-          <Skeleton className="w-[200px] h-[35px] rounded-full mt-3" />
-          <Skeleton className="w-[350px] h-[10px] rounded-full mt-5" />
-          <Skeleton className="w-[300px] h-[10px] rounded-full mt-2" />
-          <div className="flex flex-row gap-5 mt-10">
-            <Button
-              className="bg-white text-black px-4 py-2 rounded-3xl w-1/2 lg:w-fit"
-              variant="flat"
-              startContent={<Play size={16} color="black" fill="black" />}
-            >
-              Watch Now
-            </Button>
+    return (
+      <div>
+        <div>
+          <Card className="w-full h-[600px] flex flex-col justify-end p-10">
+            <div className="flex flex-col">
+              <Skeleton className="w-[100px] h-[25px] rounded-full" />
+              <Skeleton className="w-[200px] h-[35px] rounded-full mt-3" />
+              <Skeleton className="w-[350px] h-[10px] rounded-full mt-5" />
+              <Skeleton className="w-[300px] h-[10px] rounded-full mt-2" />
+              <div className="flex flex-row gap-5 mt-10">
+                <Button
+                  className="bg-white text-black px-4 py-2 rounded-3xl w-1/2 lg:w-fit"
+                  variant="flat"
+                  startContent={<Play size={16} color="black" fill="black" />}
+                >
+                  Watch Now
+                </Button>
 
-            <Tooltip content="Již brzy!" placement="bottom">
-              <Button
-                className="px-4 py-2 rounded-3xl w-1/2 lg:w-fit"
-                variant="bordered"
-                startContent={
-                  <Bookmark size={16} color="white" fill="white" />
-                }
-              >
-                My List
-              </Button>
-            </Tooltip>
-          </div>
+                <Tooltip content="Již brzy!" placement="bottom">
+                  <Button
+                    className="px-4 py-2 rounded-3xl w-1/2 lg:w-fit"
+                    variant="bordered"
+                    startContent={
+                      <Bookmark size={16} color="white" fill="white" />
+                    }
+                  >
+                    My List
+                  </Button>
+                </Tooltip>
+              </div>
+            </div>
+          </Card>
         </div>
-      </Card>
-    </div>
-  </div>;
+      </div>
+    );
   }
 
   const truncateOverview = (text, maxWords) => {
