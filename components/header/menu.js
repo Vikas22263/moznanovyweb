@@ -2,6 +2,9 @@ import { Button } from '@nextui-org/react'
 import { Menu, X } from 'lucide-react'
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { BiHome } from 'react-icons/bi'
+import Link from 'next/link'
+import { CgClapperBoard } from 'react-icons/cg'
 
 const MenuComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +40,16 @@ const MenuComponent = () => {
                 <Button isIconOnly onClick={toggleMenu}><X /></Button>
               </div>
               <ul>
-                <li className="my-2">Zatím zde nic není potřeba, přijde v nové aktualizaci</li>
+                <li className="my-2">
+                  <Link href="/">
+                  <Button className='w-full ' variant="light" startContent={<BiHome size={20}/>}>Domů</Button>
+                  </Link>
+                </li>
+                <li className="my-2">
+                  <Link href="/search/">
+                  <Button className='w-full ' variant="light" startContent={<CgClapperBoard size={20}/>}>Filmy</Button>
+                  </Link>
+                </li>
                 
               </ul>
             </div>

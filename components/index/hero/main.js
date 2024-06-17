@@ -152,7 +152,7 @@ const Main = () => {
           <Chip>Naposledy přidané</Chip>
           <h1 className="text-3xl lg:text-5xl font-semibold ">{movie.title}</h1>
           <p className="opacity-80 lg:max-w-3xl">
-            {truncateOverview(movie.overview, 40)}
+            {truncateOverview(movie.overview, 20)}
           </p>
           <div className="flex flex-row gap-5 justify-center lg:justify-start mt-5">
             <Link href={`/film/${movie.id}/${movie.title}`}>

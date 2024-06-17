@@ -24,7 +24,7 @@ const config: Config = {
         "purple-dark": {
           extend: "dark", // <- inherit default values from dark theme
           colors: {
-            background: "#18181B",
+            background: "#101010",
             foreground: "#ffffff",
             primary: {
               50: "#3B096C",
@@ -38,7 +38,7 @@ const config: Config = {
               800: "#FDD5F9",
               900: "#FEECFE",
               DEFAULT: "#FFFFFF",
-              foreground: "#000000",
+              foreground: "#101010",
             },
             focus: "#F182F6",
           },
